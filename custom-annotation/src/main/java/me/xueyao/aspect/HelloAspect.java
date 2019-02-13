@@ -18,12 +18,12 @@ import java.sql.SQLOutput;
 @Component
 public class HelloAspect {
 
-    @Pointcut("@annotation(me.xueyao.aspect.Hello)")
+    @Pointcut(value = "@annotation(me.xueyao.aspect.Hello)")
     public void Hello() {
 
     }
 
-    @Before("Hello() && @annotation(hello)")
+    @Before(value = "Hello() && @annotation(hello)")
     public void beforeMethod(JoinPoint joinPoint, Hello hello) {
         String print = hello.print();
         int value = hello.value();
@@ -31,7 +31,7 @@ public class HelloAspect {
         System.out.println("默认值value = " + value + "输出内容print = " + print);
     }
 
-    @AfterReturning("Hello() && @annotation(hello)")
+    @AfterReturning(value = "Hello() && @annotation(hello)")
     public void afterMethod(JoinPoint joinPoint, Hello hello) {
         int value = hello.value();
         String print = hello.print();
