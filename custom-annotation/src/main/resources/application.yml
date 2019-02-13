@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: custom annotation
+server:
+  port: 8080
