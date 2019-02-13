@@ -21,7 +21,7 @@ public class HelloController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/world")
-    @Hello
+    @Hello(value = 1, print = "好想睡觉")
     public BaseResponse world() {
         logger.info("此方法使用了自定义注解");
         return new BaseResponse(ResponseStatus.SUCCESS);
