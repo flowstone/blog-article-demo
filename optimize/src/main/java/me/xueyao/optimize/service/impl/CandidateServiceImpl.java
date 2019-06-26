@@ -3,6 +3,8 @@ package me.xueyao.optimize.service.impl;
 import me.xueyao.optimize.service.CandidateEvent;
 import me.xueyao.optimize.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,10 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CandidateServiceImpl implements CandidateService {
     @Autowired
-    private SendEmailListener sendEmailListener;
-
-    @Autowired
-    private SendSmsListener sendSmsListener;
+    private ApplicationContext applicationContext;
     @Override
     public void saveCandidate() {
         /**
@@ -26,12 +25,12 @@ public class CandidateServiceImpl implements CandidateService {
 
         //2.发送短信
         //System.out.println("发送短信");
-        sendSmsListener.onApplicationEvent(new CandidateEvent(this));
+        applicationContext.publishEvent(new CandidateEvent(applicationContext));
 
 
         //3.发送邮件
         //System.out.println("发送邮件");
-        sendEmailListener.onApplicationEvent(new CandidateEvent(this));
+        //applicationContext.publishEvent(new CandidateEvent(applicationContext));
 
     }
 }

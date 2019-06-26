@@ -6,6 +6,7 @@ package me.xueyao.optimize.service;
  **/
 public interface CandidateService {
     /**
+     * 保存候选人
      * @author
      */
     void saveCandidate();
