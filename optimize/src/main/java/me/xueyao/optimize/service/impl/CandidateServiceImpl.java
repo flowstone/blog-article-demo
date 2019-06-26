@@ -4,8 +4,11 @@ import me.xueyao.optimize.service.CandidateEvent;
 import me.xueyao.optimize.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Simon.Xue
@@ -15,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class CandidateServiceImpl implements CandidateService {
     @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
+    private WomenServiceImpl womenService;
+    @Autowired
+    private ManServiceImpl manService;
     @Override
     public void saveCandidate() {
         /**
@@ -30,7 +37,21 @@ public class CandidateServiceImpl implements CandidateService {
 
         //3.发送邮件
         //System.out.println("发送邮件");
-        //applicationContext.publishEvent(new CandidateEvent(applicationContext));
 
     }
+
+    @Override
+    public int countCandidate(int gender) {
+        CountService countService = countServiceMap.get(gender);
+        return countService.count(gender);
+    }
+
+    Map<Integer, CountService> countServiceMap = new HashMap<>();
+    public CandidateServiceImpl(List<CountService> countServices) {
+        for (CountService countService : countServices) {
+            countServiceMap.put(countService.getGender(), countService);
+        }
+    }
+
+
 }

@@ -10,4 +10,11 @@ public interface CandidateService {
      * @author
      */
     void saveCandidate();
+
+    /**
+     * 统计候选人
+     * @param gender 性别
+     * @return
+     */
+    int countCandidate(int gender);
 }

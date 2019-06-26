@@ -19,4 +19,9 @@ public class OptimizeApplicationTests {
         candidateService.saveCandidate();
     }
 
+    @Test
+    public void countCandidate() {
+        System.out.println(candidateService.countCandidate(1));
+    }
+
 }
